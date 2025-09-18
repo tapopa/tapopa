@@ -25,7 +25,7 @@ jobs:
     needs:
       - appcast
       - build
-      - build-linux
+      # - build-linux
       - copyright
       - dartanalyze
       - dartdoc
@@ -35,7 +35,7 @@ jobs:
       - pubspec
       - test-e2e
       - test-unit
-      - validate-publish
+      # - validate-publish
     runs-on: ubuntu-latest
     steps:
       - run: true
@@ -92,7 +92,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        chart: ["messenger"]
+        chart: ["tapopa"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -117,7 +117,8 @@ jobs:
 
   validate-publish:
     name: validate (${{ matrix.store }})
-    if: ${{ github.event_name == 'pull_request' }}
+    # TODO: Remove `false` when ready to ship iOS and Android.
+    if: false && ${{ github.event_name == 'pull_request' }}
     needs: ["build"]
     strategy:
       matrix:
@@ -255,12 +256,13 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - apk
-          - appbundle
-          - ipa
-          - macos
+          # TODO: Uncomment platforms when ready to ship those.
+          # - apk
+          # - appbundle
+          # - ipa
+          # - macos
           - web
-          - windows
+          # - windows
     runs-on: ${{ (contains('ipa macos', matrix.platform) && 'macos-latest')
               || (matrix.platform == 'windows'           && 'windows-latest')
               ||                                            'ubuntu-latest' }}
@@ -479,7 +481,7 @@ jobs:
       - run: mv build/app/outputs/bundle/release/app-release.aab
                 artifacts/${{ steps.app.outputs.group1 }}-android.aab
         if: ${{ matrix.platform == 'appbundle' }}
-      - run: mv build/ios/ipa/messenger.ipa
+      - run: mv build/ios/ipa/tapopa.ipa
                 artifacts/${{ steps.app.outputs.group1 }}-ios.ipa
         if: ${{ matrix.platform == 'ipa' }}
       - run: mkdir -p dist/ && mv *.app dist/  # `.app` executable is a folder itself
@@ -592,6 +594,8 @@ jobs:
     runs-on: ubuntu-latest
     # Pin glibc to 2.34 version for better compatibility.
     container: debian:bookworm
+    # TODO: Remove when ready to ship Linux platform.
+    if: disabled
     steps:
       # `debian:bookworm` doesn't include Git in its `PATH`, which is required
       # by `PubspecBuilder`.
@@ -720,7 +724,10 @@ jobs:
              || startsWith(github.ref, 'refs/tags/v') }}
 
   docker:
-    needs: ["appcast", "build", "build-linux"]
+    needs:
+      - appcast
+      - build
+      # - build-linux
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -732,31 +739,32 @@ jobs:
       - run: mkdir -p build/web/
       - run: unzip *.zip -d build/web/
 
-      - run: mkdir -p build/web/artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-apk-${{ github.run_number }}
-          path: build/web/artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-appbundle-${{ github.run_number }}
-          path: build/web/artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-ipa-${{ github.run_number }}
-          path: build/web/artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-linux-${{ github.run_number }}
-          path: build/web/artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-macos-${{ github.run_number }}
-          path: build/web/artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-windows-${{ github.run_number }}
-          path: build/web/artifacts/
+      # TODO: Uncomment when `build` compiles the provided platforms.
+      # - run: mkdir -p build/web/artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-apk-${{ github.run_number }}
+      #     path: build/web/artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-appbundle-${{ github.run_number }}
+      #     path: build/web/artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-ipa-${{ github.run_number }}
+      #     path: build/web/artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-linux-${{ github.run_number }}
+      #     path: build/web/artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-macos-${{ github.run_number }}
+      #     path: build/web/artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-windows-${{ github.run_number }}
+      #     path: build/web/artifacts/
 
       # TODO: Refactor when actions/download-artifact#176 is implemented:
       #       https://github.com/actions/download-artifact/issues/176
@@ -843,7 +851,7 @@ jobs:
           envkey_COMPOSE_FRONTEND_IMAGE: nginx
           envkey_COMPOSE_FRONTEND_TAG: stable-alpine
           envkey_COMPOSE_FILESERVER: ${{ secrets.E2E_FILESERVER }}
-          envkey_COMPOSE_PROJECT_NAME: messenger
+          envkey_COMPOSE_PROJECT_NAME: tapopa
           envkey_COMPOSE_VAULT: ${{ secrets.E2E_VAULT }}
           fail_on_empty: true
 
@@ -1023,7 +1031,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        chart: ["messenger"]
+        chart: ["tapopa"]
     runs-on: ubuntu-latest
     steps:
       - id: skip
@@ -1141,6 +1149,8 @@ jobs:
           - Google Play
     runs-on: ${{ matrix.store == 'App Store' && 'macos'
               ||                                'ubuntu' }}-latest
+    # TODO: Uncomment when ready to publish iOS and Android.
+    if: false
     steps:
       - uses: actions/checkout@v5
 
@@ -1228,13 +1238,13 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     needs:
       - build
-      - build-linux
+      # - build-linux
       - copyright
       - dartanalyze
       - dartdoc
       - dartfmt
       - docker-push
-      - publish
+      # - publish
       - test-e2e
       - test-unit
     runs-on: ubuntu-latest
@@ -1261,34 +1271,34 @@ jobs:
         run: echo "link=${{ github.server_url }}/${{ github.repository }}/milestone/$(sed -n '/^## \[${{ steps.semver.outputs.group1 }}\]/,/Milestone/{s/.*milestone.\([0-9]*\).*/\1/p;}' CHANGELOG.md)"
              >> $GITHUB_OUTPUT
 
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-apk-${{ github.run_number }}
-          path: artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-appbundle-${{ github.run_number }}
-          path: artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-ipa-${{ github.run_number }}
-          path: artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-linux-${{ github.run_number }}
-          path: artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-macos-${{ github.run_number }}
-          path: artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-apk-${{ github.run_number }}
+      #     path: artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-appbundle-${{ github.run_number }}
+      #     path: artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-ipa-${{ github.run_number }}
+      #     path: artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-linux-${{ github.run_number }}
+      #     path: artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-macos-${{ github.run_number }}
+      #     path: artifacts/
       - uses: actions/download-artifact@v5
         with:
           name: build-web-${{ github.run_number }}
           path: artifacts/
-      - uses: actions/download-artifact@v5
-        with:
-          name: build-windows-${{ github.run_number }}
-          path: artifacts/
+      # - uses: actions/download-artifact@v5
+      #   with:
+      #     name: build-windows-${{ github.run_number }}
+      #     path: artifacts/
 
       - uses: actions/download-artifact@v5
         with:

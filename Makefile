@@ -46,7 +46,7 @@ FLUTTER_VER ?= $(strip \
                                                               | tr -d '"'))
 
 FCM_PROJECT = $(or $(FCM_PROJECT_ID),messenger-3872c)
-FCM_BUNDLE = $(or $(FCM_BUNDLE_ID),com.tapopa.tapopa)
+FCM_BUNDLE = $(or $(FCM_BUNDLE_ID),com.team113.messenger)
 FCM_WEB = $(or $(FCM_WEB_ID),1:985927661367:web:c604073ecefcacd15c0cb2)
 
 
@@ -684,7 +684,7 @@ endif
 
 minikube-mount-pid = $(word 1,$(shell ps | grep -v grep \
                                          | grep 'minikube mount' \
-                                         | grep 'tapopa-tapopa'))
+                                         | grep 'team113-messenger'))
 
 # Bootstrap Minikube cluster (local Kubernetes) for development environment.
 #
@@ -867,7 +867,7 @@ ifeq ($(rebuild),yes)
 	@make docker.image no-cache=$(no-cache) minikube=yes tag=dev
 endif
 ifeq ($(minikube-mount-pid),)
-	minikube mount "$(PWD):/mount/tapopa-tapopa" &
+	minikube mount "$(PWD):/mount/team113-messenger" &
 endif
 endif
 ifeq ($(helm-cluster),review)

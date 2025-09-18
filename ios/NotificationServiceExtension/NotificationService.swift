@@ -82,7 +82,7 @@ class NotificationService: UNNotificationServiceExtension {
 
   func acknowledgeDelivery(chatId: String) async {
     if let containerURL = FileManager.default.containerURL(
-      forSecurityApplicationGroupIdentifier: "group.com.tapopa.tapopa")
+      forSecurityApplicationGroupIdentifier: "group.com.team113.messenger")
     {
       let db = try! Connection("\(containerURL)common.sqlite")
 
@@ -179,7 +179,7 @@ class NotificationService: UNNotificationServiceExtension {
       """
     ]
 
-    let defaults = UserDefaults(suiteName: "group.com.tapopa.tapopa")
+    let defaults = UserDefaults(suiteName: "group.com.team113.messenger")
     let baseUrl = defaults!.value(forKey: "url") as! String
     let endpoint = defaults!.value(forKey: "endpoint") as! String
 
@@ -246,7 +246,7 @@ class NotificationService: UNNotificationServiceExtension {
       """
     ]
 
-    let defaults = UserDefaults(suiteName: "group.com.tapopa.tapopa")
+    let defaults = UserDefaults(suiteName: "group.com.team113.messenger")
     let baseUrl = defaults!.value(forKey: "url") as! String
     let endpoint = defaults!.value(forKey: "endpoint") as! String
 

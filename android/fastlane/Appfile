@@ -16,4 +16,4 @@
 # <https://www.gnu.org/licenses/agpl-3.0.html>.
 
 json_key_file("service_account.json")
-package_name("com.tapopa.tapopa")
+package_name("com.team113.messenger")

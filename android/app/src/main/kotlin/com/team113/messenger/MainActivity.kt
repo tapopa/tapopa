@@ -17,7 +17,7 @@
  * <https://www.gnu.org/licenses/agpl-3.0.html>.
  */
 
-package com.tapopa.tapopa
+package com.team113.messenger
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

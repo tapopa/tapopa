@@ -39,7 +39,7 @@
       <string>scheme</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>tapopa</string>
+        <string>gapopa</string>
       </array>
     </dict>
   </array>

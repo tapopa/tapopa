@@ -28,10 +28,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>com.tapopa.tapopa</string>
+			<string>com.team113.messenger</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tapopa</string>
+				<string>gapopa</string>
 			</array>
 		</dict>
 	</array>

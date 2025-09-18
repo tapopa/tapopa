@@ -398,7 +398,7 @@ class NotificationService extends DisposableService {
       WebUtils.onSelectNotification = onResponse;
     } else if (PlatformUtils.isWindows) {
       await WinToast.instance().initialize(
-        aumId: 'tapopa.tapopa',
+        aumId: 'team113.messenger',
         displayName: 'Tapopa',
         iconPath: kDebugMode
             ? File(r'assets\icons\app_icon.ico').absolute.path
