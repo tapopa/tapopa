@@ -1131,7 +1131,9 @@ jobs:
   #       the same `versionCode`, because Google Play expects it to be unique
   #       and errors on duplicates uploading.
   publish:
-    if: ${{ github.ref == 'refs/heads/main'
+    # TODO: Remove `false` when ready to publish iOS and Android.
+    if: false &&
+        ${{ github.ref == 'refs/heads/main'
          || startsWith(github.ref, 'refs/tags/v') }}
     needs:
       - build
@@ -1149,8 +1151,7 @@ jobs:
           - Google Play
     runs-on: ${{ matrix.store == 'App Store' && 'macos'
               ||                                'ubuntu' }}-latest
-    # TODO: Uncomment when ready to publish iOS and Android.
-    if: false
+
     steps:
       - uses: actions/checkout@v5
 
