@@ -595,7 +595,7 @@ jobs:
     # Pin glibc to 2.34 version for better compatibility.
     container: debian:bookworm
     # TODO: Remove when ready to ship Linux platform.
-    if: disabled
+    if: false
     steps:
       # `debian:bookworm` doesn't include Git in its `PATH`, which is required
       # by `PubspecBuilder`.
