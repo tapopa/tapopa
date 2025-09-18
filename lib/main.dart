@@ -398,8 +398,8 @@ Future<void> handlePushNotification(RemoteMessage message) async {
       await FlutterCallkitIncoming.showCallkitIncoming(
         CallKitParams(
           id: chatId.val,
-          nameCaller: message.notification?.title ?? 'gapopa',
-          appName: 'Gapopa',
+          nameCaller: message.notification?.title ?? 'tapopa',
+          appName: 'Tapopa',
           avatar: '', // TODO: Add avatar to FCM notifications.
           handle: chatId.val,
           type: 0,
@@ -634,7 +634,7 @@ class App extends StatelessWidget {
         routerDelegate: router.delegate,
         routeInformationParser: router.parser,
         routeInformationProvider: router.provider,
-        onGenerateTitle: (context) => 'Gapopa',
+        onGenerateTitle: (context) => 'Tapopa',
         theme: Themes.light(),
         themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,

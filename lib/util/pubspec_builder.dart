@@ -88,9 +88,12 @@ class PubspecBuilder implements Builder {
       // ignore: avoid_print
       print('[PubspecBuilder] `Pubspec.ref` field is set to be `$ref+$count`.');
     } else {
-      throw Exception(
-        '[PubspecBuilder] Unable to properly generate `pubspec.g.dart` summary: `git` executable exited with code ${git.exitCode}, \nstdout: ${git.stdout}\nstderr: ${git.stderr}',
-      );
+      // TODO: Throw `Exception` instead of proceeding when any tag is released.
+      // throw Exception(
+      //   '[PubspecBuilder] Unable to properly generate `pubspec.g.dart` summary: `git` executable exited with code ${git.exitCode}, \nstdout: ${git.stdout}\nstderr: ${git.stderr}',
+      // );
+
+      buffer.write('  static const String ref = version;\n');
     }
 
     buffer.write('}\n');

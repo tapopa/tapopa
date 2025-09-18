@@ -89,7 +89,7 @@ class Config {
   static bool disableDragArea = false;
 
   /// Product identifier of `User-Agent` header to put in network queries.
-  static String userAgentProduct = 'Gapopa';
+  static String userAgentProduct = 'Tapopa';
 
   /// Version identifier of `User-Agent` header to put in network queries.
   static String userAgentVersion = '';
@@ -121,10 +121,10 @@ class Config {
 
   /// Email address of the support service displayed on the [Routes.support]
   /// page.
-  static String support = 'admin@gapopa.com';
+  static String support = 'admin@tapopa.com';
 
   /// URL of the repository (or anything else) for users to report bugs to.
-  static String repository = 'https://github.com/team113/messenger/issues';
+  static String repository = 'https://github.com/tapopa/tapopa/issues';
 
   /// Schema version of the [CommonDatabase].
   ///
@@ -140,7 +140,7 @@ class Config {
 
   /// Custom URL scheme to associate the application with when opening the deep
   /// links.
-  static String scheme = 'gapopa';
+  static String scheme = 'tapopa';
 
   /// URL address of IP geolocation API server.
   static String geoEndpoint = 'https://ipwho.is';

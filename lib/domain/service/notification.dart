@@ -260,7 +260,7 @@ class NotificationService extends DisposableService {
             '      </binding>'
             '  </visual>'
             '</toast>',
-        tag: 'Gapopa',
+        tag: 'Tapopa',
       );
     } else {
       String? imagePath;
@@ -398,8 +398,8 @@ class NotificationService extends DisposableService {
       WebUtils.onSelectNotification = onResponse;
     } else if (PlatformUtils.isWindows) {
       await WinToast.instance().initialize(
-        aumId: 'team113.messenger',
-        displayName: 'Gapopa',
+        aumId: 'tapopa.tapopa',
+        displayName: 'Tapopa',
         iconPath: kDebugMode
             ? File(r'assets\icons\app_icon.ico').absolute.path
             : File(

@@ -53,10 +53,10 @@ import sqlite3
       } else if call.method == "getSharedDirectory" {
         result(
           FileManager.default.containerURL(
-            forSecurityApplicationGroupIdentifier: "group.com.team113.messenger")?.absoluteString)
+            forSecurityApplicationGroupIdentifier: "group.com.tapopa.tapopa")?.absoluteString)
       } else if call.method == "writeDefaults" {
         let args = call.arguments as! [String: Any]
-        if let defaults = UserDefaults(suiteName: "group.com.team113.messenger") {
+        if let defaults = UserDefaults(suiteName: "group.com.tapopa.tapopa") {
           defaults.set(args["value"] as! String, forKey: args["key"] as! String)
         }
         result(nil)
@@ -143,7 +143,7 @@ import sqlite3
 
     // Check authorization.
     if let containerURL = FileManager.default.containerURL(
-      forSecurityApplicationGroupIdentifier: "group.com.team113.messenger")
+      forSecurityApplicationGroupIdentifier: "group.com.tapopa.tapopa")
     {
       let dbPath = containerURL.appendingPathComponent("common.sqlite").path
       var db: OpaquePointer?
@@ -377,7 +377,7 @@ import sqlite3
       """
     ]
 
-    let defaults = UserDefaults(suiteName: "group.com.team113.messenger")
+    let defaults = UserDefaults(suiteName: "group.com.tapopa.tapopa")
     let baseUrl = defaults!.value(forKey: "url") as! String
     let endpoint = defaults!.value(forKey: "endpoint") as! String
 
