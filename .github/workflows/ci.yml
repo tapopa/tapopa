@@ -118,7 +118,7 @@ jobs:
   validate-publish:
     name: validate (${{ matrix.store }})
     # TODO: Remove `false` when ready to ship iOS and Android.
-    if: false && ${{ github.event_name == 'pull_request' }}
+    if: false
     needs: ["build"]
     strategy:
       matrix:
