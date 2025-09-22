@@ -1151,7 +1151,6 @@ jobs:
           - Google Play
     runs-on: ${{ matrix.store == 'App Store' && 'macos'
               ||                                'ubuntu' }}-latest
-
     steps:
       - uses: actions/checkout@v5
 
