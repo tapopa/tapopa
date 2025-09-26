@@ -485,11 +485,10 @@ jobs:
                 artifacts/${{ steps.app.outputs.group1 }}-android.aab
         if: ${{ matrix.platform == 'appbundle' }}
       - run: mkdir -p dist/ && mv *.app dist/  # `.app` executable is a folder itself
-        working-directory: build/ios/iphoneos/
-        if: ${{ matrix.platform == 'ios' }}
-      - run: mkdir -p dist/ && mv *.app dist/  # `.app` executable is a folder itself
-        working-directory: build/macos/Build/Products/Release/
-        if: ${{ matrix.platform == 'macos' }}
+        working-directory: ${{ (matrix.platform == 'ios'
+                                && 'build/ios/iphoneos/')
+                            ||     'build/macos/Build/Products/Release/' }}
+        if: ${{ contains('ios macos', matrix.platform) }}
 
       - name: Notarize and staple macOS application
         run: |

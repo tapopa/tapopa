@@ -8,9 +8,9 @@ Tapopa Helm chart
 
 ## Installation
 
-Add `@tapopa-tapopa` [Helm] charts repository:
+Add `@tapopa-messenger` [Helm] charts repository:
 ```shell
-helm repo add tapopa-tapopa https://tapopa.github.io/messenger/helm
+helm repo add tapopa-messenger https://tapopa.github.io/messenger/helm
 ```
 
 See [values file][values] for details.
