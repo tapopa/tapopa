@@ -258,11 +258,12 @@ jobs:
         platform:
           - apk
           - appbundle
-          - ipa
+          # TODO: Replace with `ipa` when Apple team is assigned.
+          - ios
           - macos
           - web
           - windows
-    runs-on: ${{ (contains('ipa macos', matrix.platform) && 'macos-latest')
+    runs-on: ${{ (contains('ios macos', matrix.platform) && 'macos-latest')
               || (matrix.platform == 'windows'           && 'windows-latest')
               ||                                            'ubuntu-latest' }}
     steps:
@@ -277,7 +278,7 @@ jobs:
           channel: stable
           cache: true
       - run: brew install ripgrep
-        if: ${{ matrix.platform == 'ipa' }}
+        if: ${{ matrix.platform == 'ios' }}
       - run: sudo apt-get update
         if: ${{ contains('apk appbundle', matrix.platform) }}
       - run: sudo apt-get install -y ripgrep
@@ -289,10 +290,10 @@ jobs:
       # `git describe` command returns the valid result without possible
       # `-dirty` part, that may happen during FCM configuration.
       - run: make flutter.gen overwrite=true
-        if: ${{ contains('apk appbundle ipa web', matrix.platform) }}
+        if: ${{ contains('apk appbundle ios web', matrix.platform) }}
 
       - run: make flutter.bundle.rename to=${{ secrets.FCM_BUNDLE_ID }}
-        if: ${{ contains('apk appbundle ipa', matrix.platform) }}
+        if: ${{ contains('apk appbundle ios', matrix.platform) }}
 
       - uses: actions/setup-java@v5
         with:
@@ -407,7 +408,7 @@ jobs:
                             SOCAPP_WS_URL=${{ secrets.BACKEND_WS }}
                             SOCAPP_WS_PORT=${{ secrets.BACKEND_PORT }}
                             SOCAPP_APPCAST_URL=${{ startsWith(github.ref, 'refs/tags/v') && secrets.APPCAST_STABLE || secrets.APPCAST_MAIN }}
-                            SOCAPP_DOWNLOADS_DOWNLOADABLE=${{ !startsWith(github.ref, 'refs/tags/v') || !contains('appbundle ipa', matrix.platform) }}
+                            SOCAPP_DOWNLOADS_DOWNLOADABLE=${{ !startsWith(github.ref, 'refs/tags/v') || !contains('appbundle ios', matrix.platform) }}
                             SOCAPP_LINK_PREFIX=${{ startsWith(github.ref, 'refs/tags/v') && secrets.LINK_STABLE || secrets.LINK_MAIN }}
                             SOCAPP_SENTRY_DSN=${{ startsWith(github.ref, 'refs/tags/v') && secrets.SENTRY_DSN_STABLE || secrets.SENTRY_DSN_MAIN }}
                             SOCAPP_USER_AGENT_VERSION=${{ steps.semver.outputs.group1 }}'
@@ -483,9 +484,9 @@ jobs:
       - run: mv build/app/outputs/bundle/release/app-release.aab
                 artifacts/${{ steps.app.outputs.group1 }}-android.aab
         if: ${{ matrix.platform == 'appbundle' }}
-      - run: mv build/ios/ipa/tapopa.ipa
-                artifacts/${{ steps.app.outputs.group1 }}-ios.ipa
-        if: ${{ matrix.platform == 'ipa' }}
+      - run: mkdir -p dist/ && mv *.app dist/  # `.app` executable is a folder itself
+        working-directory: build/ios/iphoneos/
+        if: ${{ matrix.platform == 'ios' }}
       - run: mkdir -p dist/ && mv *.app dist/  # `.app` executable is a folder itself
         working-directory: build/macos/Build/Products/Release/
         if: ${{ matrix.platform == 'macos' }}
@@ -518,10 +519,12 @@ jobs:
           filename: ${{ github.workspace }}/artifacts/${{ steps.app.outputs.group1 }}-${{ matrix.platform }}.zip
           directory: ${{ (matrix.platform == 'macos'
                           && 'build/macos/Build/Products/Release/dist')
+                      || (matrix.platform == 'ios'
+                          && 'build/ios/iphoneos/dist')
                       || (matrix.platform == 'windows'
                           && 'build/windows/x64/runner/Release')
                       ||     'build/web'}}
-        if: ${{ contains('macos web windows', matrix.platform) }}
+        if: ${{ contains('ios macos web windows', matrix.platform) }}
 
       - name: Generate SHA256 checksums
         run: ${{ (runner.os == 'Windows'
@@ -1128,9 +1131,7 @@ jobs:
   #       and errors on duplicates uploading.
   publish:
     # TODO: Remove `false` when ready to publish iOS and Android.
-    if: false &&
-        ${{ github.ref == 'refs/heads/main'
-         || startsWith(github.ref, 'refs/tags/v') }}
+    if: false
     needs:
       - build
       - build-linux
