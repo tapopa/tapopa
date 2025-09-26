@@ -351,7 +351,7 @@ jobs:
           echo "${{ secrets.ANDROID_PROPERTIES }}" \
           > android/key.properties
         # TODO: Remove `false` when ready for Android codesign.
-        if: false && ${{ contains('apk appbundle', matrix.platform) }}
+        if: false
 
       - name: Prepare iOS signing resources
         run: |
@@ -392,7 +392,7 @@ jobs:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_SIGNING_CERTIFICATE }}
           P12_PASSWORD: ${{ secrets.IOS_SIGNING_CERTIFICATE_PASSWORD }}
         # TODO: Remove `false` when ready for iOS codesign.
-        if: false && ${{ matrix.platform == 'ipa' }}
+        if: false
 
       # TODO: Add the following `split-debug-info`, when self-hosted Sentry
       #       supports debug symbols:
@@ -467,7 +467,7 @@ jobs:
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
           P12_PASSWORD: ${{ secrets.MACOS_SIGNING_CERTIFICATE_PASSWORD }}
         # TODO: Remove `false` when ready for macOS codesign.
-        if: false && ${{ matrix.platform == 'macos' }}
+        if: false
 
       - name: Parse application name from Git repository name
         id: app
@@ -510,9 +510,7 @@ jobs:
           TEAM_ID: ${{ secrets.NOTARY_TEAM_ID }}
           PASSWORD: ${{ secrets.NOTARY_PASSWORD }}
         # TODO: Remove `false` when ready for macOS notarization.
-        if: false && ${{ matrix.platform == 'macos'
-             && (github.ref == 'refs/heads/main'
-                 || startsWith(github.ref, 'refs/tags/v')) }}
+        if: false
 
       - uses: thedoctor0/zip-release@0.7.6
         with:

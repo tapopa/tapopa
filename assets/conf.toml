@@ -69,12 +69,12 @@
 # URL address of the application entry in App Store.
 #
 # Default:
-#   app_store_url = "https://apps.apple.com/app/tapopa/id6444211477"
+#   app_store_url = ""
 
 # URL address of the application entry in Google Play.
 #
 # Default:
-#   google_play_url = "https://play.google.com/store/apps/details?id=com.tapopa.messenger"
+#   google_play_url = ""
 
 [user.agent]
 # Product identifier of `User-Agent` header to put in network queries.
