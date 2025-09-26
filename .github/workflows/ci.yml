@@ -322,7 +322,8 @@ jobs:
                         platforms="android,ios,web" \
                         web-id=${{ secrets.FCM_WEB_APP_ID }} \
                         bundle-id=${{ secrets.FCM_BUNDLE_ID }}
-        if: ${{ contains('apk appbundle ipa web', matrix.platform) }}
+        # TODO: Include `apk appbundle ipa` when FCM is ready for those.
+        if: ${{ contains('web', matrix.platform) }}
       - name: Configure FCM (Firebase Cloud Messaging) service worker
         run: echo '${{ secrets.FIREBASE_CREDENTIALS_JS }}'
              > web/firebase-credentials.js
