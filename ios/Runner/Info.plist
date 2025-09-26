@@ -28,7 +28,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>com.team113.messenger</string>
+			<string>com.tapopa.messenger</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>gapopa</string>

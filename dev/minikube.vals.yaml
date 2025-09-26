@@ -2,13 +2,13 @@ nameOverride: tapopa
 
 
 image:
-  repository: tapopa/tapopa
+  repository: tapopa/messenger
   tag: dev
   pullPolicy: Never
 
 deployment:
   src:
-    hostPath: /mount/tapopa-tapopa
+    hostPath: /mount/tapopa-messenger
 
 ingress:
   hosts:

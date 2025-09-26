@@ -1,7 +1,7 @@
 Tapopa Helm chart
 ====================
 
-[Changelog](https://github.com/tapopa/tapopa/blob/main/helm/tapopa/CHANGELOG.md)
+[Changelog](https://github.com/tapopa/messenger/blob/main/helm/tapopa/CHANGELOG.md)
 
 
 
@@ -10,7 +10,7 @@ Tapopa Helm chart
 
 Add `@tapopa-tapopa` [Helm] charts repository:
 ```shell
-helm repo add tapopa-tapopa https://tapopa.github.io/tapopa/helm
+helm repo add tapopa-tapopa https://tapopa.github.io/messenger/helm
 ```
 
 See [values file][values] for details.
@@ -32,6 +32,6 @@ You should have received a copy of the [GNU Affero General Public License v3.0] 
 
 
 
-[GNU Affero General Public License v3.0]: https://github.com/tapopa/tapopa/blob/main/helm/tapopa/LICENSE
+[GNU Affero General Public License v3.0]: https://github.com/tapopa/messenger/blob/main/helm/tapopa/LICENSE
 [Helm]: https://helm.sh
-[values]: https://github.com/tapopa/tapopa/blob/main/helm/tapopa/values.yaml
+[values]: https://github.com/tapopa/messenger/blob/main/helm/tapopa/values.yaml

@@ -1,9 +1,9 @@
 [Messenger](https://tapopa.com) by Tapopa
 ====================
 
-Docs: [main](https://tapopa.github.io/tapopa/main/) ([release](https://tapopa.github.io/tapopa/release/))  
-[Changelog](https://github.com/tapopa/tapopa/blob/main/CHANGELOG.md)  
-[Contribution Guide](https://github.com/tapopa/tapopa/blob/main/CONTRIBUTING.md)  
+Docs: [main](https://tapopa.github.io/messenger/main/) ([release](https://tapopa.github.io/messenger/release/))  
+[Changelog](https://github.com/tapopa/messenger/blob/main/CHANGELOG.md)  
+[Contribution Guide](https://github.com/tapopa/messenger/blob/main/CONTRIBUTING.md)  
 
 Messenger by Tapopa.
 
@@ -26,4 +26,4 @@ You should have received a copy of the [GNU Affero General Public License v3.0] 
 
 
 
-[GNU Affero General Public License v3.0]: https://github.com/tapopa/tapopa/blob/main/LICENSE.md
+[GNU Affero General Public License v3.0]: https://github.com/tapopa/messenger/blob/main/LICENSE.md

@@ -1,5 +1,7 @@
 // Copyright © 2022-2025 IT ENGINEERING MANAGEMENT INC,
 //                       <https://github.com/team113>
+// Copyright © 2025 Ideas Networks Solutions S.A.,
+//                       <https://github.com/tapopa>
 //
 // This program is free software: you can redistribute it and/or modify it under
 // the terms of the GNU Affero General Public License v3.0 as published by the
@@ -68,11 +70,10 @@ class Config {
   static bool downloadable = true;
 
   /// URL of the application entry in App Store.
-  static String appStoreUrl = 'https://apps.apple.com/app/gapopa/id6444211477';
+  static String appStoreUrl = '';
 
   /// URL of the application entry in Google Play.
-  static String googlePlayUrl =
-      'https://play.google.com/store/apps/details?id=com.team113.messenger';
+  static String googlePlayUrl = '';
 
   /// VAPID (Voluntary Application Server Identification) key for Web Push.
   static String vapidKey =
@@ -124,7 +125,7 @@ class Config {
   static String support = 'admin@tapopa.com';
 
   /// URL of the repository (or anything else) for users to report bugs to.
-  static String repository = 'https://github.com/tapopa/tapopa/issues';
+  static String repository = 'https://github.com/tapopa/messenger/issues';
 
   /// Schema version of the [CommonDatabase].
   ///

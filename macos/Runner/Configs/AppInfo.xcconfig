@@ -9,7 +9,7 @@
 PRODUCT_NAME = Tapopa
 
 // The application's bundle identifier.
-PRODUCT_BUNDLE_IDENTIFIER = com.team113.messenger
+PRODUCT_BUNDLE_IDENTIFIER = com.tapopa.messenger
 
 // The copyright displayed in application information.
 PRODUCT_COPYRIGHT = Copyright © 2025 Ideas Networks Solutions S.A. All rights reserved.

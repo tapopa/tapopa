@@ -7,7 +7,7 @@ All user visible changes to this project will be documented in this file. This p
 
 
 ## [0.1.0] · 2025-??-??
-[0.1.0]: https://github.com/tapopa/tapopa/tree/helm%2Ftapopa%2F0.1.0/helm/tapopa
+[0.1.0]: https://github.com/tapopa/messenger/tree/helm%2Ftapopa%2F0.1.0/helm/tapopa
 
 ### Added
 
@@ -18,7 +18,7 @@ All user visible changes to this project will be documented in this file. This p
     - Handling optional `www.` domain part.
 - Ability to specify application's configuration. ([#1])
 
-[#1]: https://github.com/tapopa/tapopa/pull/1
+[#1]: https://github.com/tapopa/messenger/pull/1
 
 
 

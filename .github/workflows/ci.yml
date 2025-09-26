@@ -25,7 +25,7 @@ jobs:
     needs:
       - appcast
       - build
-      # - build-linux
+      - build-linux
       - copyright
       - dartanalyze
       - dartdoc
@@ -256,13 +256,12 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          # TODO: Uncomment platforms when ready to ship those.
-          # - apk
-          # - appbundle
-          # - ipa
-          # - macos
+          - apk
+          - appbundle
+          - ipa
+          - macos
           - web
-          # - windows
+          - windows
     runs-on: ${{ (contains('ipa macos', matrix.platform) && 'macos-latest')
               || (matrix.platform == 'windows'           && 'windows-latest')
               ||                                            'ubuntu-latest' }}
@@ -594,8 +593,6 @@ jobs:
     runs-on: ubuntu-latest
     # Pin glibc to 2.34 version for better compatibility.
     container: debian:bookworm
-    # TODO: Remove when ready to ship Linux platform.
-    if: false
     steps:
       # `debian:bookworm` doesn't include Git in its `PATH`, which is required
       # by `PubspecBuilder`.
@@ -724,10 +721,7 @@ jobs:
              || startsWith(github.ref, 'refs/tags/v') }}
 
   docker:
-    needs:
-      - appcast
-      - build
-      # - build-linux
+    needs: ["appcast", "build", "build-linux"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -739,7 +733,7 @@ jobs:
       - run: mkdir -p build/web/
       - run: unzip *.zip -d build/web/
 
-      # TODO: Uncomment when `build` compiles the provided platforms.
+      # TODO: Uncomment ready to ship the provided platforms.
       # - run: mkdir -p build/web/artifacts/
       # - uses: actions/download-artifact@v5
       #   with:
@@ -1238,7 +1232,7 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     needs:
       - build
-      # - build-linux
+      - build-linux
       - copyright
       - dartanalyze
       - dartdoc
