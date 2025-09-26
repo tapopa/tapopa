@@ -401,7 +401,6 @@ jobs:
       #       https://github.com/getsentry/sentry-dart/issues/433
       #       https://github.com/getsentry/sentry-dart/issues/896
       - run: make flutter.build platform=${{ matrix.platform }}
-                  export-options="$HOME/export_options.plist"
                   dart-env='SOCAPP_HTTP_URL=${{ secrets.BACKEND_URL }}
                             SOCAPP_HTTP_PORT=${{ secrets.BACKEND_PORT }}
                             SOCAPP_WS_URL=${{ secrets.BACKEND_WS }}
@@ -580,15 +579,15 @@ jobs:
           source $RUNNER_TEMP/venv/bin/activate
           security delete-keychain $(keychain get-default)
           keychain use-login
-        if: ${{ always()
-             && matrix.platform == 'ipa' }}
+        # TODO: Remove `false` when ready for iOS codesign.
+        if: false
 
       - name: Cleanup macOS codesign resources
         run: |
           rm -rf ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.provisionprofile
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-        if: ${{ always()
-             && matrix.platform == 'macos' }}
+        # TODO: Remove `false` when ready for macOS codesign.
+        if: false
 
   build-linux:
     name: build (linux)
